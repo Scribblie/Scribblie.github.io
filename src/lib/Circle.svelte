@@ -1,0 +1,137 @@
+<!-- CircleButtons.svelte -->
+<script>
+    export let center;
+    export let data;
+    let numButtons = 6; // Number of buttons
+    let buttonAngle = 360 / numButtons; // Angle between each button
+    let outerRadius = 260; // Radius of the outer circle
+    let innerRadius = 110; // Radius of the inner circle
+    let buttonRadius = 20; // Radius of each button
+    let initialAngle = 30; // Initial angle for the first button
+
+    // add 0.01 to initialAngle every 0.01 seconds
+    setInterval(() => {
+        initialAngle += 0.1;
+    }, 10);
+
+    // Function to calculate the spacing radius for positioning buttons around the center
+    function calculateSpacingRadius() {
+        return (outerRadius + innerRadius) / 2;
+    }
+</script>
+
+<div
+    class="outer-circle"
+    style="--button-radius: {buttonRadius}; --outer-radius: {outerRadius}; --inner-radius: {innerRadius}; --initial-angle: {initialAngle -
+        30}"
+>
+    <div class="inner-circle">
+        <div class="center-div">
+            <svelte:component this={center} {...data} />
+        </div>
+    </div>
+    <div class="buttons">
+        {#each Array(numButtons) as _, index}
+            <a
+                href={`page${index + 1}.html`}
+                class="button"
+                style="transform: rotate({buttonAngle * index +
+                    initialAngle}deg) translateX({calculateSpacingRadius()}px)"
+            >
+                <span
+                    style="display: inline-block; transform: rotate({buttonAngle *
+                        -index -
+                        initialAngle}deg)"
+                    ><img
+                        src="images/button-{index + 1}.png"
+                        alt="button-{index + 1}"
+                    /></span
+                >
+            </a>
+        {/each}
+    </div>
+    <img
+        src="images/flower.png"
+        alt="Flower Six Petals Black Outline - Flower With 6 Petals@clipartmax.com"
+        class="flower"
+    />
+</div>
+
+<style>
+    .flower {
+        width: 600px;
+        height: 600px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-49%, -50%);
+        z-index: -1;
+        filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.183));
+        margin-left: -294px;
+        margin-top: -300px;
+        transform: rotate(calc(var(--initial-angle) * 1deg));
+    }
+
+    .outer-circle {
+        position: relative;
+        width: calc(2px * var(--outer-radius));
+        height: calc(2px * var(--outer-radius));
+        border: 3px solid #fff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 0;
+        box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.5);
+    }
+
+    .inner-circle {
+        position: absolute;
+        width: calc(2px * var(--inner-radius));
+        height: calc(2px * var(--inner-radius));
+        border: 3px transparent #fff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent; /* Ensure the inner circle is transparent */
+    }
+
+    .center-div {
+        text-align: center;
+    }
+
+    .buttons {
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        transform: translate(-5%, -5%);
+    }
+
+    .button {
+        position: absolute;
+        width: calc(2px * var(--button-radius));
+        height: calc(2px * var(--button-radius));
+        border-radius: 50%;
+        text-align: center;
+        line-height: calc(2px * var(--button-radius));
+        text-decoration: none;
+    }
+
+    .button img {
+        width: 60px;
+        height: 60px;
+        margin-left: 5px;
+        filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white)
+            drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)
+            drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.235));
+        transform: scale(1) rotate(0deg);
+        transition: transform 1s ease-in-out;
+    }
+
+    .button img:hover {
+        transform: scale(1.1) rotate(360deg);
+    }
+</style>
