@@ -33,7 +33,7 @@
     <div class="buttons">
         {#each Array(numButtons) as _, index}
             <a
-                href={`page${index + 1}.html`}
+                href="#"
                 class="button"
                 style="transform: rotate({buttonAngle * index +
                     initialAngle}deg) translateX({calculateSpacingRadius()}px)"
