@@ -26,7 +26,7 @@
     }
 
     .bg-image {
-        background-image: url('./images/cover.png');
+        background-image: url("https://github.com/Scribblie/Scribblie.github.io/blob/main/public/images/cover.png?raw=true");
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
