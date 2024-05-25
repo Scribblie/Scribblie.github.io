@@ -25,17 +25,22 @@
         position: relative;
     }
 
-    .bg-image {
-        background-image: url("https://github.com/Scribblie/Scribblie.github.io/blob/main/public/images/cover.png?raw=true");
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        z-index: -1;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
+    :global(body) {
+        background: linear-gradient(-45deg, #FF9AA2, #FFB7B2, #FFDAC1, #E2F0CB, #B5EAD7, #C7CEEA);
+        background-size: 400% 400%;
+        animation: gradient 10s ease infinite;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
     }
 
     .copyright {

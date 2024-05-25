@@ -28,6 +28,7 @@
 
 <style>
     div {
+        color: #ffffff;
         font-size: calc((6vh + 6vw) / 2);
         text-align: center;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);

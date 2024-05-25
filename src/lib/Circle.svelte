@@ -72,7 +72,8 @@
         height: calculate-size(0.2, var(--outer-radius));
 
         z-index: -1;
-        filter: drop-shadow(0px 0px 7.5px rgba(0, 0, 0, 0.183));
+        filter: drop-shadow(1px 1px 0 #ddd) drop-shadow(-1px 1px 0 #ddd)
+            drop-shadow(1px -1px 0 #ddd) drop-shadow(-1px -1px 0 #ddd) drop-shadow(0px 0px 7.5px rgba(0, 0, 0, 0.3));
         transform: rotate(calc(var(--initial-angle) * 1deg));
     }
 
