@@ -60,7 +60,7 @@
 </div>
 
 <style lang="scss">
-    @function calculate-size($factor, $amount, $m: 1, $vwm: 1.25, $vhm: 0.75) {
+    @function calculate-size($factor, $amount, $m: 1.0, $vwm: 0.80, $vhm: 1.40) {
         @return calc(
             $factor * ($amount * (1vw * $vwm) + $amount * (1vh * $vhm)) / 2 * $m
         );
