@@ -26,7 +26,7 @@
     }
 
     .bg-image {
-        background-image: url("https://img.freepik.com/free-vector/gradient-background-vector-spring-colors_53876-117271.jpg?w=1800&t=st=1716568366~exp=1716568966~hmac=22dcda3851a9ec51dbf475e787a214f6d9a9381fd5e9d3a4292b1b54372c6146");
+        background-image: url('./images/cover.png');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;

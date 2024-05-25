@@ -59,15 +59,18 @@
     />
 </div>
 
-<style>
+<style lang="scss">
+    @function calculate-size($factor, $amount, $m: 1, $vwm: 1.25, $vhm: 0.75) {
+        @return calc(
+            $factor * ($amount * (1vw * $vwm) + $amount * (1vh * $vhm)) / 2 * $m
+        );
+    }
+
     .flower {
-        width: calc(
-            0.176 * (var(--outer-radius) * 1vw + var(--outer-radius) * 1vh) / 2
-        );
-        height: calc(
-            0.2 * (var(--outer-radius) * 1vw + var(--outer-radius) * 1vh) / 2
-        );
         position: absolute;
+        width: calculate-size(0.176, var(--outer-radius));
+        height: calculate-size(0.2, var(--outer-radius));
+
         z-index: -1;
         filter: drop-shadow(0px 0px 7.5px rgba(0, 0, 0, 0.183));
         transform: rotate(calc(var(--initial-angle) * 1deg));
@@ -75,12 +78,9 @@
 
     .outer-circle {
         position: relative;
-        width: calc(
-            0.156 * (var(--outer-radius) * 1vw + var(--outer-radius) * 1vh) / 2
-        );
-        height: calc(
-            0.156 * (var(--outer-radius) * 1vw + var(--outer-radius) * 1vh) / 2
-        );
+        width: calculate-size(0.156, var(--outer-radius));
+        height: calculate-size(0.156, var(--outer-radius));
+
         border: 3px solid #fff;
         border-radius: 50%;
         display: flex;
@@ -92,12 +92,9 @@
 
     .inner-circle {
         position: absolute;
-        width: calc(
-            0.156 * (var(--inner-radius) * 1vw + var(--inner-radius) * 1vh) / 2
-        );
-        height: calc(
-            0.156 * (var(--inner-radius) * 1vw + var(--inner-radius) * 1vh) / 2
-        );
+        width: calculate-size(0.156, var(--inner-radius));
+        height: calculate-size(0.156, var(--inner-radius));
+
         border: 3px transparent #fff;
         border-radius: 50%;
         display: flex;
@@ -121,32 +118,20 @@
 
     .button {
         position: absolute;
-        width: calc(
-            0.156 * (var(--button-radius) * 1vw + var(--button-radius) * 1vh) /
-                2
-        );
-        height: calc(
-            0.156 * (var(--button-radius) * 1vw + var(--button-radius) * 1vh) /
-                2
-        );
-        line-height: calc(
-            0.156 * (var(--button-radius) * 1vw + var(--button-radius) * 1vh) /
-                2
-        );
+        width: calculate-size(0.156, var(--button-radius));
+        height: calculate-size(0.156, var(--button-radius));
+        line-height: calculate-size(0.156, var(--button-radius));
+
         border-radius: 50%;
         text-align: center;
         text-decoration: none;
     }
 
     .button img {
-        width: calc(
-            0.156 * (var(--button-radius) * 1vw + var(--button-radius) * 1vh) /
-                2 * 1.4
-        );
-        height: calc(
-            0.156 * (var(--button-radius) * 1vw + var(--button-radius) * 1vh) /
-                2 * 1.4
-        );
+        position: flex;
+        width: calculate-size(0.156, var(--button-radius), 1.4);
+        height: calculate-size(0.156, var(--button-radius), 1.4);
+
         filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white)
             drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)
             drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.235));
