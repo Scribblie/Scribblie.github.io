@@ -26,7 +26,15 @@
     }
 
     :global(body) {
-        background: linear-gradient(-45deg, #FF9AA2, #FFB7B2, #FFDAC1, #E2F0CB, #B5EAD7, #C7CEEA);
+        background: linear-gradient(
+            -45deg,
+            #ff9aa2,
+            #ffb7b2,
+            #ffdac1,
+            #e2f0cb,
+            #b5ead7,
+            #c7ceea
+        );
         background-size: 400% 400%;
         animation: gradient 10s ease infinite;
     }

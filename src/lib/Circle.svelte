@@ -8,28 +8,60 @@
     let innerRadius = 110; // Radius of the inner circle
     let buttonRadius = 20; // Radius of each button
     let initialAngle = 25; // Initial angle for the first button
+    let rotationSpeed = 0.1; // Speed of rotation
+    let rotationActive = false; // Rotation state
 
     // add 0.01 to initialAngle every 0.01 seconds
     setInterval(() => {
-        initialAngle += 0.1;
+        initialAngle += rotationSpeed;
     }, 10);
 
     // Function to calculate the spacing radius for positioning buttons around the center
     function calculateSpacingRadius() {
         return (outerRadius + innerRadius) / 4.4;
     }
+
+    // Ease in and out the rotation speed
+    function speedUpRotation() {
+        if (rotationActive) return;
+        rotationActive = true;
+
+        let increment = 0.1; // Increment value for each step
+        let interval = 20; // Interval for each step in milliseconds
+        let duration = 1500; // Duration of the speed-up in milliseconds
+        let steps = duration / interval; // Number of steps
+        let currentStep = 0;
+
+        let speedUpInterval = setInterval(() => {
+            if (currentStep < steps / 2) {
+                // Ease in
+                rotationSpeed += increment;
+            } else if (currentStep < steps) {
+                // Ease out
+                rotationSpeed -= increment;
+            } else {
+                clearInterval(speedUpInterval);
+                rotationSpeed = 0.1;
+                rotationActive = false;
+            }
+            currentStep++;
+        }, interval);
+    }
 </script>
+
+<button
+    class="center-div"
+    style="background-color: transparent; outline: none; border: none;"
+    on:click={speedUpRotation}
+>
+    <svelte:component this={center} {...data} />
+</button>
 
 <div
     class="outer-circle"
     style="--button-radius: {buttonRadius}; --outer-radius: {outerRadius}; --inner-radius: {innerRadius}; --initial-angle: {initialAngle -
         25}; --spacing-radius: {calculateSpacingRadius()}"
 >
-    <div class="inner-circle">
-        <div class="center-div">
-            <svelte:component this={center} {...data} />
-        </div>
-    </div>
     <div class="buttons">
         {#each Array(numButtons) as _, index}
             <a
@@ -60,7 +92,7 @@
 </div>
 
 <style lang="scss">
-    @function calculate-size($factor, $amount, $m: 1.0, $vwm: 0.80, $vhm: 1.40) {
+    @function calculate-size($factor, $amount, $m: 1, $vwm: 0.8, $vhm: 1.4) {
         @return calc(
             $factor * ($amount * (1vw * $vwm) + $amount * (1vh * $vhm)) / 2 * $m
         );
@@ -73,7 +105,8 @@
 
         z-index: -1;
         filter: drop-shadow(1px 1px 0 #ddd) drop-shadow(-1px 1px 0 #ddd)
-            drop-shadow(1px -1px 0 #ddd) drop-shadow(-1px -1px 0 #ddd) drop-shadow(0px 0px 7.5px rgba(0, 0, 0, 0.3));
+            drop-shadow(1px -1px 0 #ddd) drop-shadow(-1px -1px 0 #ddd)
+            drop-shadow(0px 0px 7.5px rgba(0, 0, 0, 0.3));
         transform: rotate(calc(var(--initial-angle) * 1deg));
     }
 
@@ -91,21 +124,17 @@
         box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.5);
     }
 
-    .inner-circle {
+    .center-div {
         position: absolute;
-        width: calculate-size(0.156, var(--inner-radius));
-        height: calculate-size(0.156, var(--inner-radius));
-
-        border: 3px transparent #fff;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: transparent;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        text-align: center;
     }
 
-    .center-div {
-        text-align: center;
+    .center-div:hover {
+        cursor: pointer;
     }
 
     .buttons {
