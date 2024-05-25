@@ -7,7 +7,7 @@
     let outerRadius = 260; // Radius of the outer circle
     let innerRadius = 110; // Radius of the inner circle
     let buttonRadius = 20; // Radius of each button
-    let initialAngle = 30; // Initial angle for the first button
+    let initialAngle = 25; // Initial angle for the first button
 
     // add 0.01 to initialAngle every 0.01 seconds
     setInterval(() => {
@@ -16,14 +16,14 @@
 
     // Function to calculate the spacing radius for positioning buttons around the center
     function calculateSpacingRadius() {
-        return (outerRadius + innerRadius) / 2;
+        return (outerRadius + innerRadius) / 4.4;
     }
 </script>
 
 <div
     class="outer-circle"
     style="--button-radius: {buttonRadius}; --outer-radius: {outerRadius}; --inner-radius: {innerRadius}; --initial-angle: {initialAngle -
-        30}"
+        25}; --spacing-radius: {calculateSpacingRadius()}"
 >
     <div class="inner-circle">
         <div class="center-div">
@@ -36,7 +36,9 @@
                 href="#"
                 class="button"
                 style="transform: rotate({buttonAngle * index +
-                    initialAngle}deg) translateX({calculateSpacingRadius()}px)"
+                    initialAngle}deg) translateX(calc(
+            0.176 * (var(--spacing-radius) * 1vw + var(--spacing-radius) * 1vh) / 2
+        ))"
             >
                 <span
                     style="display: inline-block; transform: rotate({buttonAngle *
@@ -59,23 +61,26 @@
 
 <style>
     .flower {
-        width: 600px;
-        height: 600px;
+        width: calc(
+            0.176 * (var(--outer-radius) * 1vw + var(--outer-radius) * 1vh) / 2
+        );
+        height: calc(
+            0.2 * (var(--outer-radius) * 1vw + var(--outer-radius) * 1vh) / 2
+        );
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-49%, -50%);
         z-index: -1;
-        filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.183));
-        margin-left: -294px;
-        margin-top: -300px;
+        filter: drop-shadow(0px 0px 7.5px rgba(0, 0, 0, 0.183));
         transform: rotate(calc(var(--initial-angle) * 1deg));
     }
 
     .outer-circle {
         position: relative;
-        width: calc(2px * var(--outer-radius));
-        height: calc(2px * var(--outer-radius));
+        width: calc(
+            0.156 * (var(--outer-radius) * 1vw + var(--outer-radius) * 1vh) / 2
+        );
+        height: calc(
+            0.156 * (var(--outer-radius) * 1vw + var(--outer-radius) * 1vh) / 2
+        );
         border: 3px solid #fff;
         border-radius: 50%;
         display: flex;
@@ -87,14 +92,18 @@
 
     .inner-circle {
         position: absolute;
-        width: calc(2px * var(--inner-radius));
-        height: calc(2px * var(--inner-radius));
+        width: calc(
+            0.156 * (var(--inner-radius) * 1vw + var(--inner-radius) * 1vh) / 2
+        );
+        height: calc(
+            0.156 * (var(--inner-radius) * 1vw + var(--inner-radius) * 1vh) / 2
+        );
         border: 3px transparent #fff;
         border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: transparent; /* Ensure the inner circle is transparent */
+        background-color: transparent;
     }
 
     .center-div {
@@ -107,23 +116,37 @@
         left: 0%;
         width: 100%;
         height: 100%;
-        transform: translate(-5%, -5%);
+        transform: translate(-5%, -2.5%);
     }
 
     .button {
         position: absolute;
-        width: calc(2px * var(--button-radius));
-        height: calc(2px * var(--button-radius));
+        width: calc(
+            0.156 * (var(--button-radius) * 1vw + var(--button-radius) * 1vh) /
+                2
+        );
+        height: calc(
+            0.156 * (var(--button-radius) * 1vw + var(--button-radius) * 1vh) /
+                2
+        );
+        line-height: calc(
+            0.156 * (var(--button-radius) * 1vw + var(--button-radius) * 1vh) /
+                2
+        );
         border-radius: 50%;
         text-align: center;
-        line-height: calc(2px * var(--button-radius));
         text-decoration: none;
     }
 
     .button img {
-        width: 60px;
-        height: 60px;
-        margin-left: 5px;
+        width: calc(
+            0.156 * (var(--button-radius) * 1vw + var(--button-radius) * 1vh) /
+                2 * 1.4
+        );
+        height: calc(
+            0.156 * (var(--button-radius) * 1vw + var(--button-radius) * 1vh) /
+                2 * 1.4
+        );
         filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white)
             drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)
             drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.235));
