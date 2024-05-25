@@ -1,14 +1,12 @@
 <script lang="ts">
     import { onMount, onDestroy } from "svelte";
-    import { writable, type Writable } from "svelte/store";
-
-    let currentIndex: Writable<number> = writable(0);
-    let interval: number | undefined;
 
     export let items: string[] = [];
+    let currentIndex: number = 0;
+    let interval: ReturnType<typeof setInterval> | undefined;
 
     function incrementIndex() {
-        currentIndex.update((n) => (n + 1) % items.length);
+        currentIndex = (currentIndex + 1) % items.length;
     }
 
     onMount(() => {
@@ -16,13 +14,13 @@
     });
 
     onDestroy(() => {
-        clearInterval(interval);
+        if (interval) clearInterval(interval);
     });
 </script>
 
 {#if items.length > 0}
     <div>
-        {items[$currentIndex]}
+        {items[currentIndex]}
     </div>
 {:else}
     <div>No items provided</div>

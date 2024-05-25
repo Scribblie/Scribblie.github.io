@@ -3,6 +3,7 @@ import tseslint from "typescript-eslint";
 import eslintPluginSvelte from 'eslint-plugin-svelte';
 import svelteParser from "svelte-eslint-parser";
 import tsParser from "@typescript-eslint/parser";
+import globals from "globals";
 
 export default [
     pluginJs.configs.recommended,
@@ -15,6 +16,9 @@ export default [
             parserOptions: {
                 parser: tsParser,
             },
+            globals: {
+                ...globals.browser
+            }
         },
     },
 ];
