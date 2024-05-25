@@ -1,5 +1,5 @@
 <!-- CircleButtons.svelte -->
-<script>
+<script lang="ts">
     export let center;
     export let data;
     let numButtons = 6; // Number of buttons
@@ -10,6 +10,9 @@
     let initialAngle = 25; // Initial angle for the first button
     let rotationSpeed = 0.1; // Speed of rotation
     let rotationActive = false; // Rotation state
+    let factor = 1; // Factor for text size
+    let scale = 1; // Scale for images
+    let selected: number = -1; // Selected button
 
     // add 0.01 to initialAngle every 0.01 seconds
     setInterval(() => {
@@ -47,25 +50,76 @@
             currentStep++;
         }, interval);
     }
+
+    function transitionOut() {
+        if (selected === -1) return speedUpRotation();
+
+        scale = 0;
+
+        setTimeout(() => {
+            outerRadius = 0;
+            innerRadius = 0;
+            factor = 0;
+
+            setTimeout(() => {
+                let flower = document.querySelector(".flower");
+                if (flower != null) {
+                    flower.remove();
+                }
+
+                // Expand the outer circle
+                outerRadius = 1000;
+
+                setTimeout(() => {
+                    // Refresh the page
+                    location.reload();
+                }, 2000);
+            }, 2000);
+        }, 1250);
+    }
+
+    function select(index: number) {
+        if (selected === index) {
+            selected = -1;
+        }
+        else {
+            selected = index;
+        }
+
+        document.querySelectorAll(".button img").forEach((button, i) => {
+            if (i === selected) {
+                button.style.filter = "drop-shadow(1px 1px 0 #77DD77) drop-shadow(-1px 1px 0 #77DD77) drop-shadow(1px -1px 0 #77DD77) drop-shadow(-1px -1px 0 #77DD77) drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.235))";
+
+                // Add rainbow to center div
+                let centerDiv = document.querySelector(".center-div");
+                if (centerDiv != null) {
+                    centerDiv.classList.add("rainbow");
+                }
+            } else {
+                button.style.filter = "drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white) drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.235))";
+            }
+        });
+    }
 </script>
 
 <button
     class="center-div"
     style="background-color: transparent; outline: none; border: none;"
-    on:click={speedUpRotation}
+    on:click={transitionOut}
 >
-    <svelte:component this={center} {...data} />
+    <svelte:component this={center} {...data} {factor} />
 </button>
 
 <div
     class="outer-circle"
     style="--button-radius: {buttonRadius}; --outer-radius: {outerRadius}; --inner-radius: {innerRadius}; --initial-angle: {initialAngle -
-        25}; --spacing-radius: {calculateSpacingRadius()}"
+        25}; --spacing-radius: {calculateSpacingRadius()}; --scale: {scale};"
 >
     <div class="buttons">
         {#each Array(numButtons) as _, index}
             <a
-                href="#"
+                on:click={() => select(index)}
+                href="#top"
                 class="button"
                 style="transform: rotate({buttonAngle * index +
                     initialAngle}deg) translateX(calc(
@@ -108,12 +162,32 @@
             drop-shadow(1px -1px 0 #ddd) drop-shadow(-1px -1px 0 #ddd)
             drop-shadow(0px 0px 7.5px rgba(0, 0, 0, 0.3));
         transform: rotate(calc(var(--initial-angle) * 1deg));
+        transition:
+            width 2s ease-in-out,
+            height 2s ease-in-out;
+        // animation: grow 2s ease-in-out forwards;
     }
 
+    // @keyframes grow {
+    //     from {
+    //         max-width: 0;
+    //         max-height: 0;
+    //     }
+    //     to {
+    //         max-width: calculate-size(0.176, var(--outer-radius));
+    //         max-height: calculate-size(0.2, var(--outer-radius));
+    //     }
+    // }
+
     .outer-circle {
-        position: relative;
+        position: absolute;
         width: calculate-size(0.156, var(--outer-radius));
         height: calculate-size(0.156, var(--outer-radius));
+
+        /* Center the circle */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
 
         border: 3px solid #fff;
         border-radius: 50%;
@@ -122,6 +196,9 @@
         align-items: center;
         z-index: 0;
         box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.5);
+        transition:
+            width 2s ease-in-out,
+            height 2s ease-in-out;
     }
 
     .center-div {
@@ -165,11 +242,25 @@
         filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white)
             drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)
             drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.235));
-        transform: scale(1) rotate(0deg);
+        transform: scale(var(--scale)) rotate(0deg);
         transition: transform 1s ease-in-out;
+        // animation: grow 4s ease-in-out forwards;
     }
 
+
+    // @keyframes grow {
+    //     0% {
+    //         transform: scale(0) rotate(calc(var(--initial-angle) * 1deg));
+    //     }
+    //     50% {
+    //         transform: scale(0) rotate(calc(var(--initial-angle) * 1deg));
+    //     }
+    //     100% {
+    //         transform: scale(var(--scale)) rotate(calc(var(--initial-angle) * 1deg));
+    //     }
+    // }
+
     .button img:hover {
-        transform: scale(1.1) rotate(360deg);
+        transform: scale(calc(var(--scale) * 1.1)) rotate(360deg);
     }
 </style>
