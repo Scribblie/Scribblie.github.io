@@ -17,6 +17,7 @@
     :global(html),
     :global(body) {
         height: 100vh;
+        width: 100vw;
         margin: 0;
         overflow: hidden;
     }
@@ -38,6 +39,9 @@
         );
         background-size: 400% 400%;
         animation: gradient 10s ease infinite;
+        overflow: hidden;
+        height: 100vh;
+        width: 100vw;
     }
 
     @keyframes gradient {
