@@ -22,8 +22,8 @@
     }
 
     main {
-        position: flex;
         text-wrap: wrap;
+        overflow: hidden;
     }
 
     :global(body) {
