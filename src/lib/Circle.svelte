@@ -13,6 +13,22 @@
     let factor = 1; // Factor for text size
     let scale = 1; // Scale for images
     let selected: number = -1; // Selected button
+    let titles = [
+        "Traditional Art",
+        "Photography",
+        "Designs",
+        "Digital Art",
+        "Crafts",
+        "Yarn Art",
+    ]; // Titles for each button
+    let descriptions = [
+        "Traditional art pieces I have made, such as paintings and drawings.",
+        "Photographs I have taken, mostly of nature and animals.",
+        "Designs I have created, such as notebooks and sketches.",
+        "Digital art pieces I have made, such as digital paintings and drawings.",
+        "Crafts I have made, such as decorated jars.",
+        "Crochet pieces I have made, such as amigurumi.",
+    ];
 
     // add 0.01 to initialAngle every 0.01 seconds
     setInterval(() => {
@@ -81,39 +97,50 @@
     function select(index: number) {
         if (selected === index) {
             selected = -1;
-        }
-        else {
+        } else {
             selected = index;
         }
 
         document.querySelectorAll(".button img").forEach((button, i) => {
             if (i === selected) {
-                button.style.filter = "drop-shadow(1px 1px 0 #77DD77) drop-shadow(-1px 1px 0 #77DD77) drop-shadow(1px -1px 0 #77DD77) drop-shadow(-1px -1px 0 #77DD77) drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.235))";
+                button.style.filter =
+                    "drop-shadow(1px 1px 0 #77DD77) drop-shadow(-1px 1px 0 #77DD77) drop-shadow(1px -1px 0 #77DD77) drop-shadow(-1px -1px 0 #77DD77) drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.235))";
 
                 // Add rainbow to center div
-                let centerDiv = document.querySelector(".center-div");
+                let centerDiv = document.querySelector(".center-button");
                 if (centerDiv != null) {
                     centerDiv.classList.add("rainbow");
                 }
             } else {
-                button.style.filter = "drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white) drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.235))";
+                button.style.filter =
+                    "drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white) drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.235))";
             }
         });
     }
 </script>
 
+<div class="selected-info" style="--scale: {scale};">
+    <div class="title">
+        {selected === -1 ? "" : titles[selected]}
+    </div>
+    <div class="description">
+        {selected === -1 ? "" : descriptions[selected]}
+    </div>
+</div>
+
 <button
-    class="center-div"
-    style="background-color: transparent; outline: none; border: none;"
+    class="center-button"
+    style="background-color: transparent;  border: none;"
     on:click={transitionOut}
+    tabindex="0"
 >
     <svelte:component this={center} {...data} {factor} />
 </button>
 
 <div
     class="outer-circle"
-    style="--button-radius: {buttonRadius}; --outer-radius: {outerRadius}; --inner-radius: {innerRadius}; --initial-angle: {initialAngle -
-        25}; --spacing-radius: {calculateSpacingRadius()}; --scale: {scale};"
+    style="--scale: {scale}; --button-radius: {buttonRadius}; --outer-radius: {outerRadius}; --inner-radius: {innerRadius}; --initial-angle: {initialAngle -
+        25}; --spacing-radius: {calculateSpacingRadius()};"
 >
     <div class="buttons">
         {#each Array(numButtons) as _, index}
@@ -150,6 +177,29 @@
         @return calc(
             $factor * ($amount * (1vw * $vwm) + $amount * (1vh * $vhm)) / 2 * $m
         );
+    }
+
+    .selected-info {
+        position: fixed; /* Changed to fixed to ensure it stays at the top of the screen */
+        top: 0; /* Aligns the element at the top */
+        left: 50%; /* Centers the element horizontally */
+        transform: translateX(
+            -50%
+        ); /* Adjusts the element back to the center horizontally */
+        z-index: 1;
+        text-align: center;
+        color: white;
+        font-size: calc((2em + 2.5vh + 2.5vw) / 3);
+        font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        opacity: var(--scale);
+        transition: opacity 2s ease-in-out;
+    }
+
+    .title {
+        font-weight: bold;
+        margin-top: auto;
+        text-wrap: nowrap;
     }
 
     .flower {
@@ -201,16 +251,25 @@
             height 2s ease-in-out;
     }
 
-    .center-div {
+    .center-button {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 1;
         text-align: center;
+        outline: none;
     }
 
-    .center-div:hover {
+    .center-button:focus {
+        outline: none;
+    }
+
+    .center-button:focus-visible {
+        outline: auto;
+    }
+
+    .center-button:hover {
         cursor: pointer;
     }
 
@@ -246,7 +305,6 @@
         transition: transform 1s ease-in-out;
         // animation: grow 4s ease-in-out forwards;
     }
-
 
     // @keyframes grow {
     //     0% {

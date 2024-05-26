@@ -22,7 +22,8 @@
     }
 
     main {
-        position: relative;
+        position: flex;
+        text-wrap: wrap;
     }
 
     :global(body) {
