@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { page } from "./stores";
     import Circle from "./lib/Circle.svelte";
     import Swap from "./lib/Swap.svelte";
 
@@ -6,7 +7,9 @@
 </script>
 
 <main>
-    <Circle center={Swap} data={{ items: names }} />
+    {#if $page === "home"}
+        <Circle center={Swap} data={{ items: names }} />
+    {/if}
     <footer class="copyright">
         Copyright © 2024 Scribblie All Rights Reserved
     </footer>

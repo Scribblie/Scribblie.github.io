@@ -1,18 +1,28 @@
 <!-- CircleButtons.svelte -->
 <script lang="ts">
+    import { page } from "../stores";
     export let center;
     export let data;
     let numButtons = 6; // Number of buttons
     let buttonAngle = 360 / numButtons; // Angle between each button
-    let outerRadius = 260; // Radius of the outer circle
-    let innerRadius = 110; // Radius of the inner circle
+    let outerRadius = 0; // Radius of the outer circle
+    let innerRadius = 0; // Radius of the inner circle
+    let spacingRadius = (260 + 110) / 4.4; // Radius for positioning buttons around the center
     let buttonRadius = 20; // Radius of each button
     let initialAngle = 25; // Initial angle for the first button
     let rotationSpeed = 0.1; // Speed of rotation
     let rotationActive = false; // Rotation state
-    let factor = 1; // Factor for text size
-    let scale = 1; // Scale for images
+    let factor = 0; // Factor for text size
+    let scale = 0; // Scale for images
     let selected: number = -1; // Selected button
+    let pages = [
+        "traditional",
+        "photography",
+        "designs",
+        "digital",
+        "crafts",
+        "yarn",
+    ];
     let titles = [
         "Traditional Art",
         "Photography",
@@ -34,11 +44,6 @@
     setInterval(() => {
         initialAngle += rotationSpeed;
     }, 10);
-
-    // Function to calculate the spacing radius for positioning buttons around the center
-    function calculateSpacingRadius() {
-        return (outerRadius + innerRadius) / 4.4;
-    }
 
     // Ease in and out the rotation speed
     function speedUpRotation() {
@@ -78,21 +83,31 @@
             factor = 0;
 
             setTimeout(() => {
-                let flower = document.querySelector(".flower");
-                if (flower != null) {
-                    flower.remove();
+                let outerCircle = document.querySelector(".outer-circle");
+                if (outerCircle != null) {
+                    outerCircle.remove();
                 }
 
-                // Expand the outer circle
-                outerRadius = 1000;
-
                 setTimeout(() => {
-                    // Refresh the page
-                    location.reload();
-                }, 2000);
-            }, 2000);
-        }, 1250);
+                    page.set(pages[selected]);
+                }, 500);
+            }, 1850);
+        }, 1000);
     }
+
+    function transitionIn() {
+        outerRadius = 260;
+        innerRadius = 110;
+        factor = 1;
+
+        setTimeout(() => {
+            scale = 1;
+        }, 1850);
+    }
+
+    setTimeout(() => {
+        transitionIn();
+    }, 1);
 
     function select(index: number) {
         if (selected === index) {
@@ -140,13 +155,15 @@
 <div
     class="outer-circle"
     style="--scale: {scale}; --button-radius: {buttonRadius}; --outer-radius: {outerRadius}; --inner-radius: {innerRadius}; --initial-angle: {initialAngle -
-        25}; --spacing-radius: {calculateSpacingRadius()};"
+        25}; --spacing-radius: {spacingRadius};"
 >
     <div class="buttons">
+        <!-- svelte-ignore a11y-no-static-element-interactions -->
+        <!-- svelte-ignore a11y-missing-attribute -->
         {#each Array(numButtons) as _, index}
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
             <a
                 on:click={() => select(index)}
-                href="#top"
                 class="button"
                 style="transform: rotate({buttonAngle * index +
                     initialAngle}deg) translateX(calc(
