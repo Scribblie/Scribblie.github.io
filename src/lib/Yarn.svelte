@@ -51,13 +51,11 @@
         imagesLoaded++;
     }
 
-    for (let i = 0; i < artworks.length; i++) {
-        const image = new Image();
-        image.onload = () => {
+    setTimeout(() => {
+        for (let i = 0; i < artworks.length; i++) {
             checkAllImagesLoaded(i);
-        };
-        image.src = `./images/yarn/thumbnail/${artworks[i]}.jpg`;
-    }
+        }
+    }, 100);
 </script>
 
 <div class="grid" style="--size: {size}">
