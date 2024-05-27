@@ -180,13 +180,10 @@
     }
 
     .selected-info {
-        position: fixed; /* Changed to fixed to ensure it stays at the top of the screen */
-        top: 0; /* Aligns the element at the top */
-        left: 50%; /* Centers the element horizontally */
-        transform: translateX(
-            -50%
-        ); /* Adjusts the element back to the center horizontally */
-        z-index: 1;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
         text-align: center;
         color: white;
         font-size: calc((2em + 2.5vh + 2.5vw) / 3);
