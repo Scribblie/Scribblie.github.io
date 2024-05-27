@@ -2,6 +2,7 @@
     import { page } from "./stores";
     import Circle from "./lib/Circle.svelte";
     import Swap from "./lib/Swap.svelte";
+    import Yarn from "./lib/Yarn.svelte";
 
     const names = ["Hazel", "Aspen", "Biscuit"];
 </script>
@@ -9,6 +10,8 @@
 <main>
     {#if $page === "home"}
         <Circle center={Swap} data={{ items: names }} />
+    {:else if $page === "yarn"}
+        <Yarn />
     {/if}
     <footer class="copyright">
         Copyright © 2024 Scribblie All Rights Reserved
