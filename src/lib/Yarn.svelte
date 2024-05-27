@@ -1,6 +1,5 @@
 <script lang="ts">
     import { page } from "../stores";
-    let size = 0;
     let out = false;
     let imagesLoaded = 0;
     let loading = 0;
@@ -52,6 +51,9 @@
                 loading--;
                 loaded = index;
             }, 500);
+            setTimeout(() => {
+                container.style.setProperty("--size-2", 1);
+            }, 2000);
         }
 
         imagesLoaded++;
@@ -64,7 +66,7 @@
     }, 100);
 </script>
 
-<div class="grid" style="--size: {size}">
+<div class="grid" style="--size: 0; --size-2: 0">
     {#each artworks as artwork, i}
         <div class="container" style="--i: {i}">
             <div class="image-container">
@@ -161,9 +163,10 @@
         background-color: rgba(255, 255, 255, 0.8);
         border-bottom-left-radius: 10px;
         padding: 5px 10px;
-        font-size: calc((var(--size)) * (2em + 0.25vh + 0.25vw) / 3);
+        font-size: calc((var(--size-2)) * (2em + 0.25vh + 0.25vw) / 3);
         color: black;
         font-family: "Courier New", Courier, monospace;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        transition: font-size 3s ease-in-out;
     }
 </style>
