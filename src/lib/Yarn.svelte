@@ -1,9 +1,12 @@
 <script lang="ts">
     import { page } from "../stores";
     let out = false;
-    let artworks = ["whale_shork"];
-    let titles = ["Whale Shork"]; // Titles for each button
-    let descriptions = ["A derpy whale shork phone pouch."];
+    let artworks = ["whale_shork_pouch", "succulent_coasters"];
+    let titles = ["Whale Shork Pouch", "Succulent Coasters"];
+    let descriptions = [
+        "A derpy whale shork phone pouch.",
+        "A set of succulent coasters in a flower pot.",
+    ];
 
     function transitionOut() {}
 
@@ -42,6 +45,9 @@
         width: 100%;
         height: 100%;
         padding: 1em;
+        justify-content: center;
+        align-content: center;
+        place-items: center;
     }
 
     .grid .container {
@@ -58,6 +64,7 @@
         max-height: 400px;
         max-width: 300px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        border: 3px solid white;
     }
 
     .grid .container img {
