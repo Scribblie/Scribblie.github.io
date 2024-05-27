@@ -1,6 +1,8 @@
 <script lang="ts">
     import { page } from "../stores";
+    let size = 0;
     let out = false;
+    let imagesLoaded = 0;
     let artworks = [
         "whale_shork_pouch",
         "succulent_coasters",
@@ -22,14 +24,28 @@
 
     function transitionOut() {}
 
-    function transitionIn() {}
+    function transitionIn() {
+        size = 1;
+    }
+
+    function checkAllImagesLoaded() {
+        imagesLoaded++;
+        if (imagesLoaded === artworks.length) {
+            transitionIn();
+        }
+    }
 
     setTimeout(() => {
-        transitionIn();
-    }, 1);
+        // Transition in only when all images have loaded
+        for (let i = 0; i < artworks.length; i++) {
+            const image = new Image();
+            image.onload = checkAllImagesLoaded;
+            image.src = `./images/yarn/${artworks[i]}.png`;
+        }
+    }, 100);
 </script>
 
-<div class="grid">
+<div class="grid" style="--size: {size}">
     {#each artworks as artwork, i}
         <div class="container" style="--i: {i}">
             <img
@@ -67,8 +83,8 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        width: 100%;
-        height: 100%;
+        width: calc(var(--size) * 100%);
+        height: calc(var(--size) * 100%);
         background: rgba(255, 255, 255, 0.5);
         border-radius: 1em;
         overflow: hidden; /* Ensure the overlay and title stay within the container */
@@ -77,6 +93,10 @@
         max-width: 300px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         border: 3px solid white;
+
+        transition:
+            width 2s ease-in-out,
+            height 2s ease-in-out;
     }
 
     .grid .container img {
@@ -101,7 +121,8 @@
     .grid .title {
         text-align: center;
         color: white;
-        font-size: calc((3em + 1vh + 1vw) / 3);
+        font-size: calc((var(--size)) * (3em + 1vh + 1vw) / 3);
         padding: 0.2em;
+        transition: font-size 3s ease-in-out;
     }
 </style>
