@@ -1,11 +1,23 @@
 <script lang="ts">
     import { page } from "../stores";
     let out = false;
-    let artworks = ["whale_shork_pouch", "succulent_coasters"];
-    let titles = ["Whale Shork Pouch", "Succulent Coasters"];
+    let artworks = [
+        "whale_shork_pouch",
+        "succulent_coasters",
+        "dino_rawr",
+        "ferret_noodle",
+    ];
+    let titles = [
+        "Whale Shork Pouch",
+        "Succulent Coasters",
+        "Dino Raaawwwrrrrrr",
+        "Ferret Noodle",
+    ];
     let descriptions = [
         "A derpy whale shork phone pouch.",
         "A set of succulent coasters in a flower pot.",
+        "A squishy dino that goes rawr.",
+        "A ferret that's a fluffy noodle.",
     ];
 
     function transitionOut() {}
@@ -40,7 +52,7 @@
 
     .grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1em;
         width: 100%;
         height: 100%;
