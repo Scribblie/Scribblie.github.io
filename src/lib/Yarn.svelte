@@ -44,10 +44,7 @@
             loading++;
             setTimeout(() => {
                 loading--;
-
-                if (loaded !== undefined) {
-                    loaded = index;
-                }
+                loaded = index;
             }, 500);
         }
 
@@ -59,7 +56,7 @@
         image.onload = () => {
             checkAllImagesLoaded(i);
         };
-        image.src = `./images/yarn/${artworks[i]}.png`;
+        image.src = `./images/yarn/thumbnail/${artworks[i]}.jpg`;
     }
 </script>
 
@@ -67,8 +64,8 @@
     {#each artworks as artwork, i}
         <div class="container" style="--i: {i}">
             <img
-                src={`./images/yarn/${artwork}.png`}
                 alt="{titles[i]}: {descriptions[i]}"
+                src={`./images/yarn/thumbnail/${artwork}.jpg`}
             />
             <div class="overlay">
                 <div class="title">{titles[i]}</div>
