@@ -3,6 +3,7 @@
     import { page } from "../stores";
     export let center;
     export let data;
+    let out = false;
     let numButtons = 6; // Number of buttons
     let buttonAngle = 360 / numButtons; // Angle between each button
     let outerRadius = 0; // Radius of the outer circle
@@ -75,6 +76,7 @@
     function transitionOut() {
         if (selected === -1) return speedUpRotation();
 
+        out = true;
         scale = 0;
 
         setTimeout(() => {
@@ -101,6 +103,8 @@
         factor = 1;
 
         setTimeout(() => {
+            if (out) return;
+
             scale = 1;
         }, 1850);
     }
