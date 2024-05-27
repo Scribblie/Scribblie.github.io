@@ -6,7 +6,6 @@
 </script>
 
 <main>
-    <div class="bg-image"></div>
     <Circle center={Swap} data={{ items: names }} />
     <footer class="copyright">
         Copyright © 2024 Scribblie All Rights Reserved
@@ -14,14 +13,6 @@
 </main>
 
 <style>
-    :global(html),
-    :global(body) {
-        height: 100vh;
-        width: 100vw;
-        margin: 0;
-        overflow: hidden;
-    }
-
     main {
         text-wrap: wrap;
         overflow: hidden;
@@ -40,8 +31,6 @@
         background-size: 400% 400%;
         animation: gradient 10s ease infinite;
         overflow: hidden;
-        height: 100vh;
-        width: 100vw;
     }
 
     @keyframes gradient {
@@ -57,8 +46,8 @@
     }
 
     .copyright {
+        position: absolute;
         font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-        position: fixed;
         bottom: 0;
         left: 0;
         width: 100%;

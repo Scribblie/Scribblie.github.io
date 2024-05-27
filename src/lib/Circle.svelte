@@ -215,17 +215,6 @@
         // animation: grow 2s ease-in-out forwards;
     }
 
-    // @keyframes grow {
-    //     from {
-    //         max-width: 0;
-    //         max-height: 0;
-    //     }
-    //     to {
-    //         max-width: calculate-size(0.176, var(--outer-radius));
-    //         max-height: calculate-size(0.2, var(--outer-radius));
-    //     }
-    // }
-
     .outer-circle {
         position: absolute;
         width: calculate-size(0.156, var(--outer-radius));
