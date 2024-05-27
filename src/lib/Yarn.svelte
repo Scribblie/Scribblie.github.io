@@ -3,6 +3,8 @@
     let size = 0;
     let out = false;
     let imagesLoaded = 0;
+    let loading = 0;
+    let loaded: number | undefined;
     let artworks = [
         "whale_shork_pouch",
         "succulent_coasters",
@@ -22,27 +24,43 @@
         "A ferret that's a fluffy noodle.",
     ];
 
-    function transitionOut() {}
+    function checkAllImagesLoaded(index: number) {
+        const container = document.querySelector(
+            `.container:nth-child(${imagesLoaded + 1})`,
+        );
 
-    function transitionIn() {
-        size = 1;
-    }
+        if (loaded === undefined) {
+            loaded = index - 1;
+        }
 
-    function checkAllImagesLoaded() {
+        if (loading > 0 || loaded !== index - 1) {
+            setTimeout(() => checkAllImagesLoaded(index), 100);
+            return;
+        }
+
+        if (container) {
+            container.style.setProperty("--size", 1);
+
+            loading++;
+            setTimeout(() => {
+                loading--;
+
+                if (loaded !== undefined) {
+                    loaded = index;
+                }
+            }, 500);
+        }
+
         imagesLoaded++;
-        if (imagesLoaded === artworks.length) {
-            transitionIn();
-        }
     }
 
-    setTimeout(() => {
-        // Transition in only when all images have loaded
-        for (let i = 0; i < artworks.length; i++) {
-            const image = new Image();
-            image.onload = checkAllImagesLoaded;
-            image.src = `./images/yarn/${artworks[i]}.png`;
-        }
-    }, 100);
+    for (let i = 0; i < artworks.length; i++) {
+        const image = new Image();
+        image.onload = () => {
+            checkAllImagesLoaded(i);
+        };
+        image.src = `./images/yarn/${artworks[i]}.png`;
+    }
 </script>
 
 <div class="grid" style="--size: {size}">
