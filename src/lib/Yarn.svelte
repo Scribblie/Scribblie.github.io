@@ -8,20 +8,26 @@
     let artworks = [
         "whale_shork_pouch",
         "succulent_coasters",
-        "dino_rawr",
         "ferret_noodle",
+        "dino_rawr",
     ];
     let titles = [
         "Whale Shork Pouch",
         "Succulent Coasters",
-        "Dino Raaawwwrrrrrr",
         "Ferret Noodle",
+        "Dino Raaawwwrrrrrr",
     ];
     let descriptions = [
         "A derpy whale shork phone pouch.",
         "A set of succulent coasters in a flower pot.",
-        "A squishy dino that goes rawr.",
         "A ferret that's a fluffy noodle.",
+        "A squishy dino that goes rawr.",
+    ];
+    let dates = [
+        { year: 2024, month: 5, day: 26 },
+        { year: 2024, month: 5, day: 14 },
+        { year: 2024, month: 4, day: 23 },
+        { year: 2024, month: 3, day: 29 },
     ];
 
     function checkAllImagesLoaded(index: number) {
@@ -61,10 +67,15 @@
 <div class="grid" style="--size: {size}">
     {#each artworks as artwork, i}
         <div class="container" style="--i: {i}">
-            <img
-                alt="{titles[i]}: {descriptions[i]}"
-                src={`./images/yarn/thumbnail/${artwork}.jpg`}
-            />
+            <div class="image-container">
+                <img
+                    alt="{titles[i]}: {descriptions[i]}"
+                    src={`./images/yarn/thumbnail/${artwork}.jpg`}
+                />
+                <div class="date-container">
+                    {dates[i].day}/{dates[i].month}/{dates[i].year}
+                </div>
+            </div>
             <div class="overlay">
                 <div class="title">{titles[i]}</div>
             </div>
@@ -126,7 +137,7 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        height: 10%; /* Adjust the height as needed */
+        height: fit-content; /* Adjust the height as needed */
         background: rgba(0, 0, 0, 0.5); /* Slightly transparent black */
         pointer-events: none; /* Ensure it doesn't block interaction */
     }
@@ -137,5 +148,22 @@
         font-size: calc((var(--size)) * (3em + 1vh + 1vw) / 3);
         padding: 0.2em;
         transition: font-size 3s ease-in-out;
+    }
+
+    .grid .container .image-container {
+        position: relative;
+    }
+
+    .grid .container .date-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-bottom-left-radius: 10px;
+        padding: 5px 10px;
+        font-size: calc((var(--size)) * (2em + 0.25vh + 0.25vw) / 3);
+        color: black;
+        font-family: "Courier New", Courier, monospace;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     }
 </style>
