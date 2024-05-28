@@ -201,7 +201,7 @@
         height: 4px;
         width: 60%;
         background: #333;
-        border-radius: 0 0 30% 30%;
+        border-radius: 0 0 40% 40%; /* Adjusted the border-radius for a slight smile */
         top: 28px;
         margin: auto;
         left: 0;
