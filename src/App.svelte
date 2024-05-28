@@ -8,7 +8,7 @@
     const names = ["Hazel", "Aspen", "Biscuit"];
 
     // Get the part after the '/'
-    let directory = location.pathname.split("/")[1];
+    let directory = location.pathname.split("#")[1];
 </script>
 
 <main>
