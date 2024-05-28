@@ -227,14 +227,20 @@
         0% {
             margin-left: 0;
         }
-        25% {
-            margin-left: 50px;
+        10% {
+            margin-left: -50px;
         }
-        50% {
+        20% {
             margin-left: 0;
         }
-        75% {
+        50% {
             margin-left: 125px;
+        }
+        80% {
+            margin-left: 0;
+        }
+        90% {
+            margin-left: -50px;
         }
         100% {
             margin-left: 0;
@@ -245,14 +251,20 @@
         0% {
             margin-left: 0;
         }
-        25% {
-            margin-left: 50px;
+        10% {
+            margin-left: -50px;
         }
-        50% {
+        20% {
             margin-left: 0;
         }
-        75% {
+        50% {
             margin-left: 125px;
+        }
+        80% {
+            margin-left: 0;
+        }
+        90% {
+            margin-left: -50px;
         }
         100% {
             margin-left: 0;
