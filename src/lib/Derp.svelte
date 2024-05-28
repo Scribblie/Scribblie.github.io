@@ -1,5 +1,39 @@
+<script>
+    import { onMount } from "svelte";
+
+    onMount(() => {
+        const hitbox = document.getElementById("hitbox");
+
+        if (hitbox === null) {
+            return;
+        }
+
+        function addHoverClass() {
+            if (hitbox === null) {
+                return;
+            }
+
+            hitbox.classList.add("hover");
+        }
+
+        function removeHoverClass() {
+            if (hitbox === null) {
+                return;
+            }
+
+            hitbox.classList.remove("hover");
+        }
+
+        hitbox.addEventListener("mouseenter", addHoverClass);
+        hitbox.addEventListener("mouseleave", removeHoverClass);
+
+        hitbox.addEventListener("touchstart", addHoverClass);
+        hitbox.addEventListener("touchend", removeHoverClass);
+    });
+</script>
+
 <div class="container">
-    <div class="hitbox">
+    <div class="hitbox" id="hitbox">
         <div class="center-content">
             <div class="cat">
                 <span class="eyes left"></span>
@@ -174,7 +208,7 @@
         right: 0;
     }
 
-    .hitbox:hover .cat {
+    .hover .center-content .cat {
         bottom: 240px;
     }
 
