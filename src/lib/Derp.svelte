@@ -125,10 +125,10 @@
     .moon {
         height: 120px;
         width: 120px;
-        background: #f4ed9e;
+        background: #faf1a3;
         border-radius: 60px;
         box-shadow: 0 0 60px 1px #ffffff;
-        border: 1px solid #f2f1e0;
+        outline: 1px solid #ffffff80;
     }
 
     .moon:before {
@@ -201,7 +201,7 @@
         height: 4px;
         width: 60%;
         background: #333;
-        border-radius: 0 0 40% 40%; /* Adjusted the border-radius for a slight smile */
+        border-radius: 0 0 40% 40%;
         top: 28px;
         margin: auto;
         left: 0;
