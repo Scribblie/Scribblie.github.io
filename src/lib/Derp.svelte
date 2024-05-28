@@ -56,6 +56,8 @@
 </div>
 
 <style>
+
+
     div {
         display: block;
         position: absolute;
@@ -125,7 +127,7 @@
     .moon {
         height: 120px;
         width: 120px;
-        background: #faf1a3;
+        background: #f4ed9e;
         border-radius: 60px;
         box-shadow: 0 0 60px 1px #ffffff;
         outline: 1px solid #ffffff80;
