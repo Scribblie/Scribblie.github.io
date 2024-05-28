@@ -1,19 +1,23 @@
-<div class="wrapper">
-    <div class="cat">
-        <span class="eyes left"></span>
-        <span class="eyes right"></span>
-        <span class="mouth"></span>
-    </div>
+<div class="container">
+    <div class="hitbox">
+        <div class="center-content">
+            <div class="cat">
+                <span class="eyes left"></span>
+                <span class="eyes right"></span>
+                <span class="mouth"></span>
+            </div>
 
-    <div class="moon">
-        <div class="sphere"></div>
-    </div>
+            <div class="moon">
+                <div class="sphere"></div>
+            </div>
 
-    <div class="cloud-container">
-        <div class="cloud"></div>
-        <div class="cloud"></div>
-        <div class="cloud"></div>
-        <div class="cloud"></div>
+            <div class="cloud-container">
+                <div class="cloud"></div>
+                <div class="cloud"></div>
+                <div class="cloud"></div>
+                <div class="cloud"></div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -28,7 +32,7 @@
         right: 0;
     }
 
-    .wrapper {
+    .hitbox {
         height: 400px;
         width: 600px;
         margin: auto;
@@ -170,7 +174,7 @@
         right: 0;
     }
 
-    .wrapper:hover .cat {
+    .hitbox:hover .cat {
         bottom: 240px;
     }
 
@@ -208,5 +212,21 @@
         100% {
             margin-left: 0;
         }
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .hitbox {
+        position: relative;
+    }
+
+    .center-content {
+        display: flex;
+        align-items: center;
     }
 </style>
