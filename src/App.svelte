@@ -3,12 +3,18 @@
     import Circle from "./lib/Circle.svelte";
     import Swap from "./lib/Swap.svelte";
     import Yarn from "./lib/Yarn.svelte";
+    import Derp from "./lib/Derp.svelte";
 
     const names = ["Hazel", "Aspen", "Biscuit"];
+
+    // Get the part after the '/'
+    let directory = location.pathname.split("/")[1];
 </script>
 
 <main>
-    {#if $page === "home"}
+    {#if directory === "derp"}
+        <Derp />
+    {:else if $page === "home"}
         <Circle center={Swap} data={{ items: names }} />
     {:else if $page === "yarn"}
         <Yarn />
