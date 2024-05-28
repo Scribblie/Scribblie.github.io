@@ -6,13 +6,10 @@
     import Derp from "./lib/Derp.svelte";
 
     const names = ["Hazel", "Aspen", "Biscuit"];
-
-    // Get the part after the '/'
-    let directory = location.pathname.split("#")[1];
 </script>
 
 <main>
-    {#if directory === "derp"}
+    {#if window.location.href.includes("#derp")}
         <Derp />
     {:else if $page === "home"}
         <Circle center={Swap} data={{ items: names }} />
