@@ -228,7 +228,7 @@
             margin-left: 0;
         }
         25% {
-            margin-left: 100px;
+            margin-left: 150px;
         }
         50% {
             margin-left: 0;
@@ -246,7 +246,7 @@
             margin-left: 0;
         }
         25% {
-            margin-left: 100px;
+            margin-left: 150px;
         }
         50% {
             margin-left: 0;
