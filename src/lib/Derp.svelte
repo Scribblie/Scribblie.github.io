@@ -88,8 +88,8 @@
         background: #ffffff;
         width: 90px;
         height: 42px;
-        animation: clouds 40s infinite;
-        -webkit-animation: clouds 40s infinite;
+        animation: clouds 50s infinite;
+        -webkit-animation: clouds 50s infinite;
         margin-left: 0;
     }
 
@@ -234,7 +234,7 @@
             margin-left: 0;
         }
         75% {
-            margin-left: 30px;
+            margin-left: 100px;
         }
         100% {
             margin-left: 0;
@@ -252,7 +252,7 @@
             margin-left: 0;
         }
         75% {
-            margin-left: 30px;
+            margin-left: 100px;
         }
         100% {
             margin-left: 0;
