@@ -88,8 +88,8 @@
         background: #ffffff;
         width: 90px;
         height: 42px;
-        animation: clouds 50s infinite;
-        -webkit-animation: clouds 50s infinite;
+        animation: clouds 35s infinite;
+        -webkit-animation: clouds 35s infinite;
         margin-left: 0;
     }
 
